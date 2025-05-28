@@ -1,4 +1,4 @@
-﻿namespace PromIt.DataLoader.Console.DataReaders
+﻿namespace PromIt.DataLoader.Console.Infrastructure.Readers
 {
     /// <summary>
     /// Перечисление с опциями работы считывателя слов.
@@ -19,7 +19,7 @@
         /// <summary>
         /// Слово имеет длину не более 400 символов.
         /// </summary>
-        WordIsLessOrEquals400Chars = 2,
+        WordLengthIsLessOrEquals400Chars = 2,
 
         /// <summary>
         /// Слово упоминается в текущем входном файле не менее 3-ёх раз.
