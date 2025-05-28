@@ -15,7 +15,7 @@ namespace PromIt.DataLoader.Tests
                 | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
                 | WordsReaderOptions.WordIsContainedAtLeast3Times);
 
-            dbWordsLoader = new DataDbLoader(reader);
+            //dbWordsLoader = new DataDbLoader(reader);
         }
 
         [Test]

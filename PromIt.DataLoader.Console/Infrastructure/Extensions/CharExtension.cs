@@ -2,7 +2,10 @@
 
 namespace PromIt.DataLoader.Console.Infrastructure.Extensions
 {
-    public static class CharExtension
+    /// <summary>
+    /// Класс с extension-методами для типа <see cref="char">System.Char</see>.
+    /// </summary>
+    internal static class CharExtension
     {
         /// <summary>
         /// Набор гласных в латинице и кириллице.

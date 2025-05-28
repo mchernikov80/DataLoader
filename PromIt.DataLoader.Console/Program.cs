@@ -1,30 +1,53 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using PromIt.DataLoader.Console.Infrastructure.Loaders;
+using PromIt.DataLoader.Console.Infrastructure.Readers;
 using PromIt.DataLoader.Database;
 
 namespace PromIt.DataLoader.Console
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
-            
-            var config = builder.Build();
-            var connectionString = config.GetConnectionString("ApplicationDbContext");
+
+            var configuration = builder.Build();
+
+            var dbConnectionString = configuration.GetConnectionString("ApplicationDbContext");
+
+            //var services = new ServiceCollection()
+            //    .AddDbContext<ApplicationDbContext>(options =>
+            //    {
+            //        // Настраиваете базу данных
+            //        options.UseSqlServer(dbConnectionString); // Или любую другую базу данных
+            //    });
+            //var serviceProvider = services.BuildServiceProvider();
+
+
+            //using (var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>())
+            //{
+            //    var words = dbContext.LoadedWords.ToList();
+            //}
+
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var options = optionsBuilder
-                .UseSqlServer(connectionString)
-                .Options;
+            var options = optionsBuilder.UseSqlServer(dbConnectionString).Options;
 
-            using (var db = new ApplicationDbContext(options))
+            using (var dbContext = new ApplicationDbContext(options))
             {
-                var words = db.LoadedWords.ToList();
-            }
+                var wordsReaderOptions = WordsReaderOptions.WordHasAtLeast2Vowels
+                    | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
+                    //| WordsReaderOptions.WordIsContainedAtLeast3Times
+                    ;
 
+                var reader = new WordsReader(wordsReaderOptions);
+                var dataLoader = new DataDbLoader(dbContext, reader);
+                await dataLoader.LoadAsync(@"d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt");
+                
+            }
 
             System.Console.Read();
         }

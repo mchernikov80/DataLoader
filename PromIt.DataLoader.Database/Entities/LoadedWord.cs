@@ -8,13 +8,13 @@ namespace PromIt.DataLoader.Database.Entities
         /// Идентификатор.
         /// </summary>
         [Key]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Слово.
         /// </summary>
         [Required]
-        [MaxLength(255)]
+        //[MaxLength(255)]
         public required string Word { get; set; }
 
         /// <summary>
