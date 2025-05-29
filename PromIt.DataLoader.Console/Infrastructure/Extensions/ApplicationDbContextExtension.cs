@@ -18,12 +18,14 @@ namespace PromIt.DataLoader.Console.Infrastructure.Extensions
 
             if (loadedWord.Id == 0)
             {
-                dbContext.LoadedWords.Add(loadedWord);
+                await dbContext.LoadedWords.AddAsync(loadedWord)
+                    .ConfigureAwait(false);
                 return;
             }
 
             var loadedWordDb = await dbContext.LoadedWords
-                .SingleAsync(e => e.Id == loadedWord.Id);
+                .SingleAsync(e => e.Id == loadedWord.Id)
+                .ConfigureAwait(false);
 
             loadedWordDb.Word = loadedWord.Word;
             loadedWordDb.Amount += loadedWord.Amount;

@@ -11,6 +11,7 @@ namespace PromIt.DataLoader.Console.Infrastructure.Loaders
     /// </summary>
     public class DataDbLoader
     {
+        private static Semaphore dbUpdateSemaphore = new Semaphore(1, 1, "495FA1AA-1798-475B-947B-E82AFD723B10");
         private readonly ApplicationDbContext dbContext;
         private readonly WordsReader reader;
 
@@ -30,11 +31,23 @@ namespace PromIt.DataLoader.Console.Infrastructure.Loaders
                 using (var stream = new FileStream(file, FileMode.Open))
                 {
                     var loadData = await reader.ReadAsync(stream);
-                    var dbUpdatedStatistics = await UpdateDbAsync(loadData);
-                    if (dbUpdatedStatistics.AddedRows > 0)
+
+                    dbUpdateSemaphore.WaitOne();
+                    try
                     {
-                        dbContext.SaveChanges();
+                        var dbUpdatedStatistics = await UpdateDbAsync(loadData);
+                        if (dbUpdatedStatistics.AddedRows > 0)
+                        {
+                            await dbContext.SaveChangesAsync()
+                                .ConfigureAwait(false);
+                        }
                     }
+                    finally
+                    {
+                        dbUpdateSemaphore.Release();
+                    }
+
+                    
                 }
             }
         }
@@ -49,7 +62,8 @@ namespace PromIt.DataLoader.Console.Infrastructure.Loaders
                 var amount = loadData[word];
                 var updatedRows = await dbContext.LoadedWords
                     .Where(e => e.Word == word)
-                    .ExecuteUpdateAsync(s => s.SetProperty(e => e.Amount, e => e.Amount + amount));
+                    .ExecuteUpdateAsync(s => s.SetProperty(e => e.Amount, e => e.Amount + amount))
+                    .ConfigureAwait(false);
                 updatedDbRows += updatedRows;
 
                 if (updatedRows == 0)

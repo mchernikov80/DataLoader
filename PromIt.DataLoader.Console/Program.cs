@@ -15,23 +15,7 @@ namespace PromIt.DataLoader.Console
                 .AddJsonFile("appsettings.json");
 
             var configuration = builder.Build();
-
             var dbConnectionString = configuration.GetConnectionString("ApplicationDbContext");
-
-            //var services = new ServiceCollection()
-            //    .AddDbContext<ApplicationDbContext>(options =>
-            //    {
-            //        // Настраиваете базу данных
-            //        options.UseSqlServer(dbConnectionString); // Или любую другую базу данных
-            //    });
-            //var serviceProvider = services.BuildServiceProvider();
-
-
-            //using (var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>())
-            //{
-            //    var words = dbContext.LoadedWords.ToList();
-            //}
-
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var options = optionsBuilder.UseSqlServer(dbConnectionString).Options;
@@ -48,8 +32,6 @@ namespace PromIt.DataLoader.Console
                 await dataLoader.LoadAsync(@"d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt");
                 
             }
-
-            System.Console.Read();
         }
     }
 }

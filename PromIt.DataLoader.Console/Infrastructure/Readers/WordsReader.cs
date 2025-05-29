@@ -32,7 +32,8 @@ namespace PromIt.DataLoader.Console.Infrastructure.Readers
             {
                 while (reader.Peek() >= 0)
                 {
-                    var line = await reader.ReadLineAsync(cancellationToken);
+                    var line = await reader.ReadLineAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     if (string.IsNullOrEmpty(line))
                     {
                         continue;
