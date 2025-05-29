@@ -3,6 +3,7 @@ using PromIt.DataLoader.Infrastructure.Extensions;
 using PromIt.DataLoader.Console.Infrastructure.Readers;
 using PromIt.DataLoader.Database;
 using PromIt.DataLoader.Database.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace PromIt.DataLoader.Console.Infrastructure.Loaders
 {
@@ -11,20 +12,27 @@ namespace PromIt.DataLoader.Console.Infrastructure.Loaders
     /// </summary>
     public class DataDbLoader
     {
-        private static Semaphore dbUpdateSemaphore = new Semaphore(1, 1, "495FA1AA-1798-475B-947B-E82AFD723B10");
+        private readonly Semaphore updateDbSemaphore;
+
+        private readonly IConfiguration configuration;
         private readonly ApplicationDbContext dbContext;
         private readonly WordsReader reader;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DataDbLoader(ApplicationDbContext dbContext, WordsReader reader)
+        public DataDbLoader(IConfiguration configuration, ApplicationDbContext dbContext, WordsReader reader)
         {
+            this.configuration = configuration;
             this.dbContext = dbContext;
             this.reader = reader;
+
+
+            var semaphoreName = configuration.GetConnectionString("UpdateDbSemaphoreName");
+            updateDbSemaphore = new Semaphore(1, 1, semaphoreName);
         }
 
-        public async Task LoadAsync(params string[] files)
+        public async Task LoadAsync(IEnumerable<string> files)
         {
             foreach (var file in files)
             {
@@ -32,7 +40,7 @@ namespace PromIt.DataLoader.Console.Infrastructure.Loaders
                 {
                     var loadData = await reader.ReadAsync(stream);
 
-                    dbUpdateSemaphore.WaitOne();
+                    updateDbSemaphore.WaitOne();
                     try
                     {
                         var dbUpdatedStatistics = await UpdateDbAsync(loadData);
@@ -44,7 +52,7 @@ namespace PromIt.DataLoader.Console.Infrastructure.Loaders
                     }
                     finally
                     {
-                        dbUpdateSemaphore.Release();
+                        updateDbSemaphore.Release();
                     }
 
                     

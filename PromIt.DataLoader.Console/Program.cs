@@ -2,6 +2,7 @@
 using PromIt.DataLoader.Console.Infrastructure.Loaders;
 using PromIt.DataLoader.Console.Infrastructure.Readers;
 using PromIt.DataLoader.Database;
+using System.Diagnostics;
 
 namespace PromIt.DataLoader.Console
 {
@@ -9,6 +10,14 @@ namespace PromIt.DataLoader.Console
     {
         static async Task Main(string[] args)
         {
+            var files = GetFiles(args);
+            if (!files.Any()) 
+            { 
+                return;
+            }
+
+            System.Console.WriteLine($"Data Loader: старт");
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
@@ -22,10 +31,34 @@ namespace PromIt.DataLoader.Console
                     ;
 
                 var reader = new WordsReader(wordsReaderOptions);
-                var dataLoader = new DataDbLoader(dbContext, reader);
-                await dataLoader.LoadAsync(@"d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt",
-                    @"d:\Projects\Prom-IT\PromIt.DataLoader\Тестовое_задание_2_Текстовый_процессор.txt");
+                var dataLoader = new DataDbLoader(configuration, dbContext, reader);
+
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                await dataLoader.LoadAsync(files);
+                stopwatch.Stop();
+
+                System.Console.WriteLine($"Data Loader: загрузка данных завершена - {stopwatch}");
             }
+
+            System.Console.ReadKey();
+        }
+
+        private static IEnumerable<string> GetFiles(IEnumerable<string> paths)
+        {
+            var files = new List<string>();
+            foreach (var path in paths) 
+            {
+                var attr = File.GetAttributes(path);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    files.AddRange(Directory.GetFiles(path));
+                    continue;
+                }
+                files.Add(path);
+            }
+
+            return files;
         }
     }
 }
