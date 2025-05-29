@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using PromIt.DataLoader.Console.Infrastructure.Loaders;
 using PromIt.DataLoader.Console.Infrastructure.Readers;
 using PromIt.DataLoader.Database;

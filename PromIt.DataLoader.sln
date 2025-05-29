@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromIt.DataLoader.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromIt.DataLoader.Database", "PromIt.DataLoader.Database\PromIt.DataLoader.Database.csproj", "{2E8E6E84-A48F-4393-9219-EFAF07A1A97B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromIt.DataSearcher.Console", "PromIt.DataSearcher.Console\PromIt.DataSearcher.Console.csproj", "{FBA6BBA5-01D4-4CE0-9D44-F87FBCA8A8F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromIt.DataLoader.Infrastructure", "PromIt.DataLoader.Infrastructure\PromIt.DataLoader.Infrastructure.csproj", "{BD5C38A7-252F-41B6-9229-EA1B48E9DAC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2E8E6E84-A48F-4393-9219-EFAF07A1A97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E8E6E84-A48F-4393-9219-EFAF07A1A97B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E8E6E84-A48F-4393-9219-EFAF07A1A97B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA6BBA5-01D4-4CE0-9D44-F87FBCA8A8F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA6BBA5-01D4-4CE0-9D44-F87FBCA8A8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA6BBA5-01D4-4CE0-9D44-F87FBCA8A8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA6BBA5-01D4-4CE0-9D44-F87FBCA8A8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5C38A7-252F-41B6-9229-EA1B48E9DAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5C38A7-252F-41B6-9229-EA1B48E9DAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5C38A7-252F-41B6-9229-EA1B48E9DAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5C38A7-252F-41B6-9229-EA1B48E9DAC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
