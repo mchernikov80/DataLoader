@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace PromIt.DataLoader.Console.Infrastructure.Extensions
+﻿namespace PromIt.DataLoader.Console.Infrastructure.Extensions
 {
     /// <summary>
     /// Класс с extension-методами для типа <see cref="char">System.Char</see>.
     /// </summary>
-    internal static class CharExtension
+    public static class CharExtension
     {
         /// <summary>
         /// Набор гласных в латинице и кириллице.
