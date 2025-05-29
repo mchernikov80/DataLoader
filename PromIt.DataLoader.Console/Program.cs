@@ -13,14 +13,9 @@ namespace PromIt.DataLoader.Console
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
-
             var configuration = builder.Build();
-            var dbConnectionString = configuration.GetConnectionString("ApplicationDbContext");
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var options = optionsBuilder.UseSqlServer(dbConnectionString).Options;
-
-            using (var dbContext = new ApplicationDbContext(options))
+            using (var dbContext = new ApplicationDbContext(configuration))
             {
                 var wordsReaderOptions = WordsReaderOptions.WordHasAtLeast2Vowels
                     | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
@@ -29,8 +24,8 @@ namespace PromIt.DataLoader.Console
 
                 var reader = new WordsReader(wordsReaderOptions);
                 var dataLoader = new DataDbLoader(dbContext, reader);
-                await dataLoader.LoadAsync(@"d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt");
-                
+                await dataLoader.LoadAsync(@"d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt",
+                    @"d:\Projects\Prom-IT\PromIt.DataLoader\Тестовое_задание_2_Текстовый_процессор.txt");
             }
         }
     }

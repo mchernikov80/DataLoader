@@ -25,7 +25,7 @@ namespace PromIt.DataLoader.Console.Infrastructure.Readers
 
         public async Task<IDictionary<string, int>> ReadAsync(Stream stream, CancellationToken cancellationToken = default)
         {
-            var words = new Dictionary<string, int>();
+            var words = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
             var wordsChecker = new WordsChecker(words, options);
 
             using (var reader = new StreamReader(stream))

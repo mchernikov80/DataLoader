@@ -14,7 +14,7 @@ namespace PromIt.DataLoader.Database.Entities
         /// Слово.
         /// </summary>
         [Required]
-        //[MaxLength(255)]
+        [StringLength(4000, MinimumLength = 1)]
         public required string Word { get; set; }
 
         /// <summary>
