@@ -72,10 +72,10 @@ namespace PromIt.DataLoader.Console.Infrastructure.Uploaders
             updateDbSemaphore.WaitOne();
             try
             {
-                var dbUpdatedStatistics = await UpdateDbAsync(loadData);
+                var dbUpdatedStatistics = await UpdateDbAsync(loadData, cancellationToken);
                 if (dbUpdatedStatistics.AddedRows > 0)
                 {
-                    await dbContext.SaveChangesAsync()
+                    await dbContext.SaveChangesAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -85,13 +85,15 @@ namespace PromIt.DataLoader.Console.Infrastructure.Uploaders
             }
         }
 
-        private async Task<(int AddedRows, int UpdatedRows)> UpdateDbAsync(IDictionary<string, int> loadData)
+        private async Task<(int AddedRows, int UpdatedRows)> UpdateDbAsync(IDictionary<string, int> loadData, CancellationToken cancellationToken)
         {
             var addedDbRows = 0;
             var updatedDbRows = 0;
 
             foreach (var word in loadData.Keys)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var amount = loadData[word];
                 var updatedRows = await dbContext.LoadedWords
                     .Where(e => e.Word == word)
