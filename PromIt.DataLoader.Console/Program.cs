@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using PromIt.DataLoader.Console.Infrastructure.Loaders;
 using PromIt.DataLoader.Console.Infrastructure.Readers;
-using PromIt.DataLoader.Database;
+using PromIt.DataLoader.Console.Infrastructure.Uploaders;
 using System.Diagnostics;
 
 namespace PromIt.DataLoader.Console
@@ -23,24 +22,23 @@ namespace PromIt.DataLoader.Console
                 .AddJsonFile("appsettings.json");
             var configuration = builder.Build();
 
-            using (var dbContext = new ApplicationDbContext(configuration))
+            var stopwatch = new Stopwatch();
+
+            var wordsReaderOptions = WordsReaderOptions.WordHasAtLeast2Vowels
+                | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
+                //| WordsReaderOptions.WordIsContainedAtLeast3Times
+                ;
+            var reader = new WordsReader(wordsReaderOptions);
+            using (var uploader = new WordsDbUploader(configuration))
             {
-                var wordsReaderOptions = WordsReaderOptions.WordHasAtLeast2Vowels
-                    | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
-                    //| WordsReaderOptions.WordIsContainedAtLeast3Times
-                    ;
+                var dataLoader = new Infrastructure.Loaders.DataLoader(reader, uploader);
 
-                var reader = new WordsReader(wordsReaderOptions);
-                var dataLoader = new DataDbLoader(configuration, dbContext, reader);
-
-                var stopwatch = new Stopwatch();
                 stopwatch.Start();
                 await dataLoader.LoadAsync(files);
                 stopwatch.Stop();
-
-                System.Console.WriteLine($"Data Loader: загрузка данных завершена - {stopwatch}");
             }
 
+            System.Console.WriteLine($"Data Loader: загрузка данных завершена - {stopwatch}");
             System.Console.ReadKey();
         }
 

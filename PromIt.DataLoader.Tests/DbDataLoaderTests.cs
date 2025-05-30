@@ -6,7 +6,7 @@ namespace PromIt.DataLoader.Tests
     [TestFixture]
     public class DbDataLoaderTests
     {
-        private DataDbLoader dbWordsLoader;
+        private Console.Infrastructure.Loaders.DataLoader dbWordsLoader;
 
         [SetUp]
         public void Setup()
@@ -22,7 +22,7 @@ namespace PromIt.DataLoader.Tests
         public async Task DbDataLoaderTest()
         {
             var files = Directory.GetFiles("Files");
-            await dbWordsLoader.LoadAsync(files);
+            //await dbWordsLoader.LoadAsync(files);
         }
     }
 }

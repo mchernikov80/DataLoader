@@ -9,14 +9,14 @@ namespace PromIt.DataLoader.Console.Infrastructure.Readers
         private readonly WordsReaderOptions options;
 
         /// <summary>
-        /// Connstructor.
+        /// Конструктор.
         /// </summary>
         public WordsReader() : this(WordsReaderOptions.None)
         {
         }
 
         /// <summary>
-        /// Connstructor.
+        /// Конструктор.
         /// </summary>
         public WordsReader(WordsReaderOptions options)
         {
