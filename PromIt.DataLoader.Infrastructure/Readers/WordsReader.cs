@@ -1,9 +1,9 @@
 ﻿using PromIt.DataLoader.Abstractions.Interfaces;
-using PromIt.DataLoader.Console.Infrastructure.Checkers;
 using PromIt.DataLoader.Console.Infrastructure.Extensions;
+using PromIt.DataLoader.Infrastructure.Checkers;
 using System.Text;
 
-namespace PromIt.DataLoader.Console.Infrastructure.Readers
+namespace PromIt.DataLoader.Infrastructure.Readers
 {
     public class WordsReader : IDataReader<string>
     {

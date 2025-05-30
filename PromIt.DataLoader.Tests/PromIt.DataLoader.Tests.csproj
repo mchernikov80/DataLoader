@@ -26,7 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PromIt.DataLoader.Console\PromIt.DataLoader.Console.csproj" />
+    <ProjectReference Include="..\PromIt.DataLoader.Abstractions\PromIt.DataLoader.Abstractions.csproj" />
+    <ProjectReference Include="..\PromIt.DataLoader.Infrastructure\PromIt.DataLoader.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

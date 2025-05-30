@@ -1,4 +1,4 @@
-﻿namespace PromIt.DataLoader.Console.Infrastructure.Readers
+﻿namespace PromIt.DataLoader.Infrastructure.Readers
 {
     /// <summary>
     /// Перечисление с опциями работы считывателя слов.

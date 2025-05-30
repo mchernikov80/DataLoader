@@ -1,5 +1,5 @@
-﻿using PromIt.DataLoader.Console.Infrastructure.Loaders;
-using PromIt.DataLoader.Console.Infrastructure.Readers;
+﻿using PromIt.DataLoader.Infrastructure.Loaders;
+using PromIt.DataLoader.Infrastructure.Readers;
 
 namespace PromIt.DataLoader.Tests
 {

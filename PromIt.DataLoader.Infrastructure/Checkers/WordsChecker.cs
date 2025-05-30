@@ -1,8 +1,8 @@
 ﻿using PromIt.DataLoader.Console.Infrastructure.Extensions;
-using PromIt.DataLoader.Console.Infrastructure.Readers;
+using PromIt.DataLoader.Infrastructure.Readers;
 using System.Text;
 
-namespace PromIt.DataLoader.Console.Infrastructure.Checkers
+namespace PromIt.DataLoader.Infrastructure.Checkers
 {
     internal class WordsChecker
     {

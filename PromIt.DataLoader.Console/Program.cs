@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using PromIt.DataLoader.Console.Infrastructure.Loaders;
-using PromIt.DataLoader.Console.Infrastructure.Readers;
-using PromIt.DataLoader.Console.Infrastructure.Uploaders;
+using PromIt.DataLoader.Infrastructure.Loaders;
+using PromIt.DataLoader.Infrastructure.Readers;
+using PromIt.DataLoader.Infrastructure.Uploaders;
 using System.Diagnostics;
 
 namespace PromIt.DataLoader.Console

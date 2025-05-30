@@ -5,12 +5,12 @@ using PromIt.DataLoader.Database;
 using PromIt.DataLoader.Database.Entities;
 using PromIt.DataLoader.Infrastructure.Extensions;
 
-namespace PromIt.DataLoader.Console.Infrastructure.Uploaders
+namespace PromIt.DataLoader.Infrastructure.Uploaders
 {
     /// <summary>
     /// Загрузчик слов в БД.
     /// </summary>
-    internal class WordsDbUploader : IDataUploader<string>, IDisposable
+    public class WordsDbUploader : IDataUploader<string>, IDisposable
     {
         private readonly Semaphore updateDbSemaphore;
         private readonly ApplicationDbContext dbContext;
