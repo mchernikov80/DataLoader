@@ -4,18 +4,18 @@ using PromIt.DataLoader.Abstractions.Interfaces;
 namespace PromIt.DataLoader.Console.Infrastructure.Loaders
 {
     /// <summary>
-    /// Загрузчик данных в БД.
+    /// Загрузчик данных.
     /// </summary>
-    public class DataLoader
+    public class DataLoader<T>
     {
-        private readonly WordsReader dataReader;
+        private readonly IDataReader<T> dataReader;
 
-        private readonly IDataUploader<string> dataUploader;
+        private readonly IDataUploader<T> dataUploader;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DataLoader(WordsReader dataReader, IDataUploader<string> dataUploader)
+        public DataLoader(IDataReader<T> dataReader, IDataUploader<T> dataUploader)
         {
             this.dataReader = dataReader;
             this.dataUploader = dataUploader;

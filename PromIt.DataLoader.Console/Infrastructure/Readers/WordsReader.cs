@@ -1,10 +1,11 @@
-﻿using PromIt.DataLoader.Console.Infrastructure.Checkers;
+﻿using PromIt.DataLoader.Abstractions.Interfaces;
+using PromIt.DataLoader.Console.Infrastructure.Checkers;
 using PromIt.DataLoader.Console.Infrastructure.Extensions;
 using System.Text;
 
 namespace PromIt.DataLoader.Console.Infrastructure.Readers
 {
-    public class WordsReader
+    public class WordsReader : IDataReader<string>
     {
         private readonly WordsReaderOptions options;
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using PromIt.DataLoader.Console.Infrastructure.Loaders;
 using PromIt.DataLoader.Console.Infrastructure.Readers;
 using PromIt.DataLoader.Console.Infrastructure.Uploaders;
 using System.Diagnostics;
@@ -23,6 +24,7 @@ namespace PromIt.DataLoader.Console
             var configuration = builder.Build();
 
             var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             var wordsReaderOptions = WordsReaderOptions.WordHasAtLeast2Vowels
                 | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
@@ -31,12 +33,11 @@ namespace PromIt.DataLoader.Console
             var reader = new WordsReader(wordsReaderOptions);
             using (var uploader = new WordsDbUploader(configuration))
             {
-                var dataLoader = new Infrastructure.Loaders.DataLoader(reader, uploader);
-
-                stopwatch.Start();
-                await dataLoader.LoadAsync(files);
-                stopwatch.Stop();
+                var wordsLoader = new DataLoader<string>(reader, uploader);
+                await wordsLoader.LoadAsync(files);
             }
+
+            stopwatch.Stop();
 
             System.Console.WriteLine($"Data Loader: загрузка данных завершена - {stopwatch}");
             System.Console.ReadKey();

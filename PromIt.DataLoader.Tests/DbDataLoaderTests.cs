@@ -6,7 +6,7 @@ namespace PromIt.DataLoader.Tests
     [TestFixture]
     public class DbDataLoaderTests
     {
-        private Console.Infrastructure.Loaders.DataLoader dbWordsLoader;
+        private DataLoader<string> loader;
 
         [SetUp]
         public void Setup()
