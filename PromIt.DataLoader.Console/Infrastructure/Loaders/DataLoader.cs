@@ -1,5 +1,5 @@
 ﻿using PromIt.DataLoader.Console.Infrastructure.Readers;
-using PromIt.DataLoader.Console.Interfaces;
+using PromIt.DataLoader.Abstractions.Interfaces;
 
 namespace PromIt.DataLoader.Console.Infrastructure.Loaders
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using PromIt.DataLoader.Console.Interfaces;
+using PromIt.DataLoader.Abstractions.Interfaces;
 using PromIt.DataLoader.Database;
 using PromIt.DataLoader.Database.Entities;
 using PromIt.DataLoader.Infrastructure.Extensions;

@@ -1,4 +1,4 @@
-﻿namespace PromIt.DataLoader.Console.Interfaces
+﻿namespace PromIt.DataLoader.Abstractions.Interfaces
 {
     public interface IDataUploader<T>
     {
