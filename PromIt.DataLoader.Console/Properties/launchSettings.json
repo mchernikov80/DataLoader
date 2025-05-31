@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PromIt.DataLoader.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "d:\\Projects\\Prom-IT\\PromIt.DataLoader\\PromIt.DataLoader.Tests\\Files\\test3.txt d:\\Projects\\Prom-IT\\PromIt.DataLoader\\TZ.txt d:\\Projects\\Prom-IT\\PromIt.DataLoader\\PromIt.DataLoader.Tests\\Files"
+    }
+  }
+}
