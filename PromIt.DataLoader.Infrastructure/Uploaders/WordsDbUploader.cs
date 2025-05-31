@@ -12,7 +12,14 @@ namespace PromIt.DataLoader.Infrastructure.Uploaders
     /// </summary>
     public class WordsDbUploader : IDataUploader<string>, IDisposable
     {
+        /// <summary>
+        /// Семафор работы загрузчика.
+        /// </summary>
         private readonly Semaphore updateDbSemaphore;
+
+        /// <summary>
+        /// EF контекст базы данных.
+        /// </summary>
         private readonly ApplicationDbContext dbContext;
 
         /// <summary>
@@ -67,6 +74,7 @@ namespace PromIt.DataLoader.Infrastructure.Uploaders
         }
         #endregion
 
+        /// <inheritdoc />
         public async Task UploadAsync(IDictionary<string, int> loadData, CancellationToken cancellationToken = default)
         {
             updateDbSemaphore.WaitOne();

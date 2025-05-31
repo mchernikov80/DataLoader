@@ -1,10 +1,13 @@
 ﻿namespace PromIt.DataSearcher.Console.Helpers
 {
     /// <summary>
-    /// Класс-хелпер для работы с <see cref="System.Console">System.Console</see>.
+    /// Класс-хелпер для работы с <see cref="System.Console" />.
     /// </summary>
     internal static class ConsoleHelper
     {
+        /// <summary>
+        /// Пишест строку в консоль в указанном цвете.
+        /// </summary>
         public static void WriteColoredLine(string message, ConsoleColor color)
         {
             var oldColor = System.Console.ForegroundColor;

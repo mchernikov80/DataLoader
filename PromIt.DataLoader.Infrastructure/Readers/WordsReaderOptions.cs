@@ -1,7 +1,7 @@
 ﻿namespace PromIt.DataLoader.Infrastructure.Readers
 {
     /// <summary>
-    /// Перечисление с опциями работы считывателя слов.
+    /// Опции работы <see cref="WordsReader"/>.
     /// </summary>
     [Flags]
     public enum WordsReaderOptions

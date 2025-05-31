@@ -7,12 +7,18 @@ namespace PromIt.DataLoader.Infrastructure.Loaders
     /// </summary>
     public class DataLoader<T>
     {
+        /// <summary>
+        /// Считыватель данных.
+        /// </summary>
         private readonly IDataReader<T> dataReader;
 
+        /// <summary>
+        /// Загрузчик данных.
+        /// </summary>
         private readonly IDataUploader<T> dataUploader;
 
         /// <summary>
-        /// Constructor.
+        /// Конструктор.
         /// </summary>
         public DataLoader(IDataReader<T> dataReader, IDataUploader<T> dataUploader)
         {
@@ -20,6 +26,9 @@ namespace PromIt.DataLoader.Infrastructure.Loaders
             this.dataUploader = dataUploader;
         }
 
+        /// <summary>
+        /// Загрузить данные из файлов.
+        /// </summary>
         public async Task LoadAsync(IEnumerable<string> files, CancellationToken cancellationToken = default)
         {
             foreach (var file in files)

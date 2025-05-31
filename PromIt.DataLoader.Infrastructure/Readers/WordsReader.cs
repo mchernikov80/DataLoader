@@ -5,8 +5,14 @@ using System.Text;
 
 namespace PromIt.DataLoader.Infrastructure.Readers
 {
+    /// <summary>
+    /// Считыватель слов.
+    /// </summary>
     public class WordsReader : IDataReader<string>
     {
+        /// <summary>
+        /// Опции работы.
+        /// </summary>
         private readonly WordsReaderOptions options;
 
         /// <summary>
@@ -24,10 +30,11 @@ namespace PromIt.DataLoader.Infrastructure.Readers
             this.options = options;
         }
 
+        /// <inheritdoc/>
         public async Task<IDictionary<string, int>> ReadAsync(Stream stream, CancellationToken cancellationToken = default)
         {
             var words = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            var wordsChecker = new WordsChecker(words, options);
+            var wordsChecker = new WordsChecker(options);
 
             using (var reader = new StreamReader(stream))
             {
@@ -52,7 +59,7 @@ namespace PromIt.DataLoader.Infrastructure.Readers
                     }
                 }
             }
-            wordsChecker.Validate();
+            wordsChecker.Validate(words);
             return words;
         }
 

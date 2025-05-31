@@ -4,21 +4,27 @@ using System.Text;
 
 namespace PromIt.DataLoader.Infrastructure.Checkers
 {
+    /// <summary>
+    /// Класс с методами валидации слов.
+    /// </summary>
     internal class WordsChecker
     {
-        private readonly IDictionary<string, int> words;
-
+        /// <summary>
+        /// Опции работы <see cref="WordsReader"/>
+        /// </summary>
         private readonly WordsReaderOptions options;
 
         /// <summary>
-        /// Constructor.
+        /// Конструктор.
         /// </summary>
-        public WordsChecker(IDictionary<string, int> words, WordsReaderOptions options)
+        public WordsChecker(WordsReaderOptions options)
         {
-            this.words = words;
             this.options = options;
         }
 
+        /// <summary>
+        /// Возвращает признак валидности слова.
+        /// </summary>
         public bool IsValid(StringBuilder word)
         {
             if (word.Length < 1)
@@ -53,7 +59,10 @@ namespace PromIt.DataLoader.Infrastructure.Checkers
             return true;
         }
 
-        public void Validate()
+        /// <summary>
+        /// Валидирует сформированный словарь слов.
+        /// </summary>
+        public void Validate(IDictionary<string, int> words)
         {
             if (!NeedCheckOption(WordsReaderOptions.WordIsContainedAtLeast3Times))
             {

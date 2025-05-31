@@ -2,6 +2,9 @@
 
 namespace PromIt.DataLoader.Database.Entities
 {
+    /// <summary>
+    /// Сущность загруженных слов.
+    /// </summary>
     public class LoadedWord
     {
         /// <summary>

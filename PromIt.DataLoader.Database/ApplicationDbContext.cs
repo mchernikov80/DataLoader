@@ -6,7 +6,7 @@ using PromIt.DataLoader.Database.Entities;
 namespace PromIt.DataLoader.Database
 {
     /// <summary>
-    /// EF БД контекст.
+    /// EF контекст базы данных.
     /// </summary>
     public class ApplicationDbContext : DbContext
     {
@@ -40,6 +40,9 @@ namespace PromIt.DataLoader.Database
             });
         }
 
+        /// <summary>
+        /// Загруженные слова.
+        /// </summary>
         public DbSet<LoadedWord> LoadedWords { get; set; } = null!;
     }
 }

@@ -28,9 +28,9 @@ namespace PromIt.DataLoader.Console
 
             var wordsReaderOptions = WordsReaderOptions.WordHasAtLeast2Vowels
                 | WordsReaderOptions.WordLengthIsLessOrEquals400Chars
-                //| WordsReaderOptions.WordIsContainedAtLeast3Times
-                ;
+                | WordsReaderOptions.WordIsContainedAtLeast3Times;
             var reader = new WordsReader(wordsReaderOptions);
+
             using (var uploader = new WordsDbUploader(configuration))
             {
                 var wordsLoader = new DataLoader<string>(reader, uploader);
