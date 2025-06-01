@@ -1,1 +1,2 @@
-".\PromIt.DataLoader.Console\bin\Release\net8.0\PromIt.DataLoader.Console.exe" "d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt" ".\TZ.txt" ".\PromIt.DataLoader.Tests\Files"
+chcp 1251
+".\PromIt.DataLoader.Console\bin\Release\net8.0\PromIt.DataLoader.Console.exe" "d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt" ".\Тестовое_задание_2_Текстовый_процессор.txt" ".\PromIt.DataLoader.Tests\Files"
