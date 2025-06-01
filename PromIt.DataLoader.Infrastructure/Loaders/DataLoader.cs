@@ -33,7 +33,7 @@ namespace PromIt.DataLoader.Infrastructure.Loaders
         {
             foreach (var file in files)
             {
-                using (var stream = new FileStream(file, FileMode.Open))
+                using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     var loadData = await dataReader.ReadAsync(stream, cancellationToken);
                     await dataUploader.UploadAsync(loadData, cancellationToken);

@@ -15,7 +15,7 @@ namespace PromIt.DataLoader.Infrastructure.Uploaders
         /// <summary>
         /// Семафор работы загрузчика.
         /// </summary>
-        private readonly Semaphore updateDbSemaphore;
+        private readonly Semaphore uploadDbSemaphore;
 
         /// <summary>
         /// EF контекст базы данных.
@@ -27,8 +27,8 @@ namespace PromIt.DataLoader.Infrastructure.Uploaders
         /// </summary>
         public WordsDbUploader(IConfiguration configuration) 
         { 
-            var semaphoreName = configuration.GetConnectionString("UpdateDbSemaphoreName");
-            updateDbSemaphore = new Semaphore(1, 1, semaphoreName);
+            var semaphoreName = configuration.GetSection("UploadDbSemaphoreName").Value;
+            uploadDbSemaphore = new Semaphore(1, 1, semaphoreName);
             dbContext = new ApplicationDbContext(configuration);
         }
 
@@ -51,13 +51,7 @@ namespace PromIt.DataLoader.Infrastructure.Uploaders
 
             try
             {
-                updateDbSemaphore?.Release();
-            }
-            catch { }
-
-            try
-            {
-                updateDbSemaphore?.Close();
+                uploadDbSemaphore?.Close();
             }
             catch { }
 
@@ -77,19 +71,25 @@ namespace PromIt.DataLoader.Infrastructure.Uploaders
         /// <inheritdoc />
         public async Task UploadAsync(IDictionary<string, int> loadData, CancellationToken cancellationToken = default)
         {
-            updateDbSemaphore.WaitOne();
+            uploadDbSemaphore.WaitOne();
             try
             {
-                var dbUpdatedStatistics = await UpdateDbAsync(loadData, cancellationToken);
-                if (dbUpdatedStatistics.AddedRows > 0)
-                {
-                    await dbContext.SaveChangesAsync(cancellationToken)
-                        .ConfigureAwait(false);
-                }
+                await UploadDbAsync(loadData, cancellationToken);
             }
             finally
             {
-                updateDbSemaphore.Release();
+                uploadDbSemaphore.Release();
+            }
+        }
+
+        /// <inheritdoc />
+        public virtual async Task UploadDbAsync(IDictionary<string, int> loadData, CancellationToken cancellationToken)
+        {
+            var dbUpdatedStatistics = await UpdateDbAsync(loadData, cancellationToken);
+            if (dbUpdatedStatistics.AddedRows > 0)
+            {
+                await dbContext.SaveChangesAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
