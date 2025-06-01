@@ -19,3 +19,6 @@
 Перед первым запуском приложения следует выполнить SQL-скрипт создания схемы БД:
 CREATE DATABASE [PromIT.LoadedData];
 
+![image](https://github.com/user-attachments/assets/fc62d0cf-b47d-48ee-a5ce-62ca0c10ce19)
+
+![image](https://github.com/user-attachments/assets/be51913a-8243-4a5b-9d91-808e15704c3b)
