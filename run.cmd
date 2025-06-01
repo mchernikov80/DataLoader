@@ -1,0 +1,1 @@
+".\PromIt.DataLoader.Console\bin\Release\net8.0\PromIt.DataLoader.Console.exe" "d:\Projects\Prom-IT\PromIt.DataLoader\PromIt.DataLoader.Tests\Files\test3.txt" ".\TZ.txt" ".\PromIt.DataLoader.Tests\Files"
