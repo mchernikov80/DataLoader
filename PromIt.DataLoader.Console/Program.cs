@@ -12,7 +12,9 @@ namespace PromIt.DataLoader.Console
         {
             var files = GetFiles(args);
             if (!files.Any()) 
-            { 
+            {
+                System.Console.WriteLine($"Укажите файлы или директорию для считывания слов");
+                System.Console.ReadKey();
                 return;
             }
 
